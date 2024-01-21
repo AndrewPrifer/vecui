@@ -1,20 +1,21 @@
 # VecUI
 
-Tiny, ergonomic, fun vector library for UI engineers.
+Tiny, ergonomic and fun vector library for UI engineers.
 
 ## Why?
 
-UIs are made of rectangles. Rectangles are made of 2 vectors. One for describing their origin point, and another for describing their width and height. Treating them as vectors instead of 4 disjointed numbers makes it much easier to reason about them and can trivially cut complex UI code in half (see demo).
+UIs are made of rectangles. Rectangles are made of 2 vectors. One for describing their origin point, and another for describing their width and height. Treating them as vectors instead of 4 disjointed numbers makes it much easier to reason about them and can trivially cut complex UI code in half (see [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32)).
 
 VecUI includes utilities to turn your UI into vectors and back again, and comes with a beautiful API that is both easy to read and write.
 
 ## Features
 
-- All the Vector2D methods you know and love.
+- All the vector operations you would expect and more.
 - A beautiful, ergonomic API that doesn't make you repeat yourself.
 - Immutable values. Treat your vectors just like any other primitive.
 - Utilities for working with UIs.
-- Tiny.
+- Probably the most fun you'll ever have with vectors.
+- <1 KB
 
 ## Installation
 
