@@ -1,0 +1,39 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.rect {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.rect.center {
+  background: rgb(240, 195, 137);
+}
+
+.rect.other {
+  background: rgb(237, 158, 233);
+  color: white;
+  font-weight: 800;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
