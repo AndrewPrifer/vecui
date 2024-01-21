@@ -16,6 +16,9 @@
   ],
   "license": "MIT",
   "author": "Andrew Prifer (https://github.com/AndrewPrifer)",
+  "repository": "AndrewPrifer/vecui",
+  "bugs": "https://github.com/AndrewPrifer/vecui/issues",
+  "homepage": "https://github.com/AndrewPrifer/vecui",
   "version": "0.0.0",
   "type": "module",
   "files": [
