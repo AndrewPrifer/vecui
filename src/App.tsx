@@ -83,7 +83,7 @@ function App() {
         whileHover={{
           // while hovered, expand the pink div by
           ...rect(
-            // negatively offsetting its origin by the hover expand vector (only in the y direction if keepAlignedOnHover is true)
+            // negatively offsetting its origin by the hover expand vector (only in the y direction if keepAlignedOnHover is true by zeroing the x component)
             alignedRect.o.sub(
               hoverExpandVec.mul(keepAlignedOnHover ? 0 : 1, 1)
             ),
