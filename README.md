@@ -24,7 +24,69 @@ yarn add vecui
 
 ## Usage
 
-TODO
+The best way to get an intuition for VecUI and see what it looks like is to play with the [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32).
+
+Alternatively, here's an excerpt (the actual demo is not much longer, you should really go play with it).
+
+```typescript
+// How much the pink div will expand on hover on either direction
+const hoverExpandVec = vec(hoverExpand);
+
+let alignedRect: UIRect | null = null;
+
+// Create a vector for the dimensions of the yellow div
+const centerRectDim = vec(centerRectSize);
+// Create a rect representing the yellow div and offset it by minus half its dimensions so that it's centered
+const centerRect = rect(centerRectDim.div(-2), centerRectDim);
+
+// Create a rect for the pink div
+const otherRect = rect(vec(0), vec(otherRectSize));
+
+// Align it to the right side of the yellow div by
+alignedRect = rect(
+  centerRect.o
+    // offsetting its origin by the width of the yellow div
+    .add(centerRect.d.x, 0)
+    // adding the padding in the x direction and
+    .add(
+      padding,
+      // centering it vertically
+      centerRect.d.sub(otherRect.d).div(2).y
+    ),
+  otherRect.d
+);
+
+return (
+  <div className="container">
+    <div
+      className="center rect"
+      style={{
+        // apply the yellow div's rect
+        ...centerRect.as.css,
+      }}
+    />
+    <motion.div
+      className="other rect"
+      initial={false}
+      animate={{
+        // apply the pink div's rect
+        ...alignedRect.as.css,
+      }}
+      whileHover={{
+        // while hovered, expand the pink div by
+        ...rect(
+          // negatively offsetting its origin by the hover expand vector (only in the y direction if keepAlignedOnHover is true)
+          alignedRect.o.sub(hoverExpandVec.mul(keepAlignedOnHover ? 0 : 1, 1)),
+          // adding the hover expand vector to its dimensions (twice because it's being added to both sides)
+          alignedRect.d.add(hoverExpandVec.mul(2))
+        ).as.css,
+      }}
+    >
+      Hover me!
+    </motion.div>
+  </div>
+);
+```
 
 ## API
 

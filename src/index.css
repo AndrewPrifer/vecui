@@ -18,6 +18,10 @@ body {
   min-height: 100vh;
 }
 
+.container {
+  position: relative;
+}
+
 .rect {
   position: absolute;
   box-sizing: border-box;
