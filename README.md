@@ -127,12 +127,12 @@ r1.d; // => vec(3, 4)
 
 #### **as()**
 
-Maps the rectangle to an object with the specified names.
+Maps the rectangle to an object with the specified property names.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
 
-r1.as(["x", "y", "width", "height"]); // => { x: 1, y: 2, width: 3, height: 4 }
+r1.as("x", "y", "width", "height"); // => { x: 1, y: 2, width: 3, height: 4 }
 ```
 
 Alternatively, you can also use the `.as.css` shortcut to map the rectangle to an object with the names `top`, `left`, `width`, and `height`.
@@ -145,7 +145,7 @@ r1.as.css; // => { top: 1, left: 2, width: 3, height: 4 }
 
 #### **equals()**
 
-Checks if the vector equals another vector or specified components.
+Checks if this rect equals another rect.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
@@ -327,4 +327,18 @@ Checks if the vector is within a given rectangle.
 const v1 = vec(1, 2);
 
 v1.isInRect({ x: 0, y: 0, width: 2, height: 3 }); // => true
+```
+
+#### **equals()**
+
+Checks if the vector equals another vector or specified components.
+
+```typescript
+const v1 = vec(1, 2);
+const v2 = vec(1, 2);
+
+v1.equals(v2); // => true
+
+// You can also directly compare components.
+v1.equals(1, 2); // => true
 ```
