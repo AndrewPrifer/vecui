@@ -91,13 +91,13 @@ return (
 
 ## API
 
-The API consists of functions to create and manipulate vectors and rectangles. All vectors are 2 dimensional. Rectangles are composed of 2 vectors, one for the origin point, and another for the width and height. All values are immutable, functions return new values instead of mutating existing ones.
+The API consists of functions to create and manipulate vectors and rectangles. VecUI vectors are 2 dimensional. Rectangles are composed of 2 vectors, one for the origin point, and another for the width and height. All values are immutable, functions return new values instead of mutating existing ones.
 
 ### Rectangles
 
 #### **rect()**
 
-You can create rectangles using the `rect` function.
+Creates a rectangle with the specified origin point and dimensions.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
@@ -158,7 +158,7 @@ r1.equals(r2); // => true
 
 #### **vec()**
 
-You can create vectors using the `vec` function.
+Creates a vector with the specified components.
 
 ```typescript
 const v1 = vec(1, 2);
