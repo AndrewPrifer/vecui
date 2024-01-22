@@ -238,10 +238,12 @@ export type Rect = {
     Y extends string,
     Width extends string,
     Height extends string
-  >([x, y, width, height]: [X, Y, Width, Height]) => Record<
-    X | Y | Width | Height,
-    number
-  >) & {
+  >(
+    x: X,
+    y: Y,
+    width: Width,
+    height: Height
+  ) => Record<X | Y | Width | Height, number>) & {
     css: Record<"left" | "top" | "width" | "height", number>;
   };
   equals: (other: Rect) => boolean;
@@ -263,7 +265,12 @@ export function rect(rectOrOrigin: InputRect | Vector, dim?: Vector): Rect {
     Y extends string,
     Width extends string,
     Height extends string
-  >([x, y, width, height]: [X, Y, Width, Height]) =>
+  >(
+    x: X,
+    y: Y,
+    width: Width,
+    height: Height
+  ) =>
     ({
       [x]: enhanced.o.x,
       [y]: enhanced.o.y,
