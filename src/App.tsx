@@ -1,5 +1,5 @@
 import React from "react";
-import { vec, rect, UIRect } from "../lib/main";
+import { vec, rect, Rect } from "../lib/main";
 import { motion } from "framer-motion";
 import { useControls } from "leva";
 
@@ -40,7 +40,7 @@ function App() {
   // How much the pink div will expand on hover on either direction
   const hoverExpandVec = vec(hoverExpand);
 
-  let alignedRect: UIRect | null = null;
+  let alignedRect: Rect | null = null;
 
   // Create a vector for the dimensions of the yellow div
   const centerRectDim = vec(centerRectSize);

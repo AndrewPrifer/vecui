@@ -168,7 +168,7 @@ class Vector {
     return this.rotRad((degrees * Math.PI) / 180);
   }
 
-  public isInRect(rect: Rect): boolean {
+  public isInRect(rect: InputRect): boolean {
     return (
       rect.x <= this.x &&
       rect.x + rect.width >= this.x &&
@@ -196,7 +196,7 @@ class Vector {
   }
 }
 
-export type Rect = {
+export type InputRect = {
   x: number;
   y: number;
   width: number;
@@ -230,7 +230,7 @@ export function vec(
   return new Vector(xOrArrayOrObject.x, xOrArrayOrObject.y);
 }
 
-export type UIRect = {
+export type Rect = {
   o: Vector;
   d: Vector;
   as: (<
@@ -244,12 +244,12 @@ export type UIRect = {
   >) & {
     css: Record<"left" | "top" | "width" | "height", number>;
   };
-  equals: (other: UIRect) => boolean;
+  equals: (other: Rect) => boolean;
 };
 
-export function rect(origin: Vector, dim: Vector): UIRect;
-export function rect(rect: Rect): UIRect;
-export function rect(rectOrOrigin: Rect | Vector, dim?: Vector): UIRect {
+export function rect(origin: Vector, dim: Vector): Rect;
+export function rect(rect: InputRect): Rect;
+export function rect(rectOrOrigin: InputRect | Vector, dim?: Vector): Rect {
   const enhanced = {
     o: rectOrOrigin instanceof Vector ? rectOrOrigin : vec(rectOrOrigin),
     d:
@@ -278,7 +278,7 @@ export function rect(rectOrOrigin: Rect | Vector, dim?: Vector): UIRect {
     height: enhanced.d.y,
   };
 
-  const equals = (other: UIRect) =>
+  const equals = (other: Rect) =>
     other.o.equals(enhanced.o) && other.d.equals(enhanced.d);
 
   return {
@@ -288,4 +288,4 @@ export function rect(rectOrOrigin: Rect | Vector, dim?: Vector): UIRect {
   };
 }
 
-export type { Vector };
+export type { Vector as Vec };
