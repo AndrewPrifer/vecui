@@ -2,7 +2,7 @@
  * An immutable 2D Vector that supports various operations.
  * @public
  */
-class Vector {
+class Vec {
   /**
    * Create a vector with the given components.
    * @param x - The component of the x-axis.
@@ -16,17 +16,17 @@ class Vector {
    * @param other - The vector to be added.
    * @returns The resulting vector of the addition.
    */
-  public add(other: Vector): Vector;
+  public add(other: Vec): Vec;
   /**
    * Add another vector to the vector.
    * @param x - The component of the x-axis.
    * @param y - The component of the y-axis.
    * @returns The resulting vector of the addition.
    */
-  public add(x: number, y?: number): Vector;
-  public add(vecOrX: Vector | number, y?: number): Vector {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
-    return new Vector(this.x + other.x, this.y + other.y);
+  public add(x: number, y?: number): Vec;
+  public add(vecOrX: Vec | number, y?: number): Vec {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
+    return new Vec(this.x + other.x, this.y + other.y);
   }
 
   /**
@@ -34,17 +34,17 @@ class Vector {
    * @param other - The vector to be added.
    * @returns The resulting vector of the subtraction.
    */
-  public sub(other: Vector): Vector;
+  public sub(other: Vec): Vec;
   /**
    * Subtract another vector from the vector.
    * @param x - The component of the x-axis.
    * @param y - The component of the y-axis.
    * @returns The resulting vector of the subtraction.
    */
-  public sub(x: number, y?: number): Vector;
-  public sub(vecOrX: Vector | number, y?: number): Vector {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
-    return new Vector(this.x - other.x, this.y - other.y);
+  public sub(x: number, y?: number): Vec;
+  public sub(vecOrX: Vec | number, y?: number): Vec {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
+    return new Vec(this.x - other.x, this.y - other.y);
   }
 
   /**
@@ -52,23 +52,23 @@ class Vector {
    * @param scalar - The scalar the vector will be divided by.
    * @returns The resulting vector of the division.
    */
-  public div(scalar: number): Vector;
+  public div(scalar: number): Vec;
   /**
    * Divide the vector by another vector.
    * @param other - The other vector used for dividing.
    * @returns The resulting vector of the division.
    */
-  public div(other: Vector): Vector;
+  public div(other: Vec): Vec;
   /**
    * Divide the vector by another vector.
    * @param x - The component of the x-axis.
    * @param y - The component of the y-axis.
    * @returns The resulting vector of the division.
    */
-  public div(x: number, y: number): Vector;
-  public div(vecOrX: Vector | number, y?: number): Vector {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
-    return new Vector(this.x / other.x, this.y / other.y);
+  public div(x: number, y: number): Vec;
+  public div(vecOrX: Vec | number, y?: number): Vec {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
+    return new Vec(this.x / other.x, this.y / other.y);
   }
 
   /**
@@ -76,7 +76,7 @@ class Vector {
    * @param other - The other vector used for calculating the dot product.
    * @returns The dot product.
    */
-  public dot(other: Vector): number;
+  public dot(other: Vec): number;
   /**
    * Calculate the dot product of the vector and another vector.
    * @param x - The component of the x-axis.
@@ -84,8 +84,8 @@ class Vector {
    * @returns The dot product.
    */
   public dot(x: number, y: number): number;
-  public dot(vecOrX: Vector | number, y?: number): number {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
+  public dot(vecOrX: Vec | number, y?: number): number {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
     return this.x * other.x + this.y * other.y;
   }
 
@@ -94,7 +94,7 @@ class Vector {
    * @param other - The other vector used for calculating the cross product.
    * @returns The cross product.
    */
-  public cross(other: Vector): number;
+  public cross(other: Vec): number;
   /**
    * Calculate the cross product of the vector and another vector. The cross product of two vectors `a` and `b` is defined as `a.x * b.y - a.y * b.x`.
    * @param x - The component of the x-axis.
@@ -102,8 +102,8 @@ class Vector {
    * @returns The cross product.
    */
   public cross(x: number, y?: number): number;
-  public cross(vecOrX: Vector | number, y?: number): number {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
+  public cross(vecOrX: Vec | number, y?: number): number {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
     return this.x * other.y - other.x * this.y;
   }
 
@@ -112,23 +112,23 @@ class Vector {
    * @param other - The other vector used for calculating the Hadamard product.
    * @returns The Hadamard product.
    */
-  public mul(other: Vector): Vector;
+  public mul(other: Vec): Vec;
   /**
    * Calculate the element-wise (Hadamard) product of the vector and another vector.
    * @param x - The component of the x-axis.
    * @param y - The component of the y-axis.
    * @returns The Hadamard product.
    */
-  public mul(x: number, y: number): Vector;
+  public mul(x: number, y: number): Vec;
   /**
    * Multiply the vector by a scalar.
    * @param scalar - The scalar the vector will be multiplied by.
    * @returns The resulting vector of the multiplication.
    */
-  public mul(scalar: number): Vector;
-  public mul(vecOrX: Vector | number, y?: number): Vector {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
-    return new Vector(this.x * other.x, this.y * other.y);
+  public mul(scalar: number): Vec;
+  public mul(vecOrX: Vec | number, y?: number): Vec {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
+    return new Vec(this.x * other.x, this.y * other.y);
   }
 
   /**
@@ -143,9 +143,9 @@ class Vector {
    * Normalize the vector using the L2 norm.
    * @returns The normalized vector.
    */
-  public norm(): Vector {
+  public norm(): Vec {
     const length = this.len();
-    return new Vector(this.x / length, this.y / length);
+    return new Vec(this.x / length, this.y / length);
   }
 
   /**
@@ -153,10 +153,10 @@ class Vector {
    * @param radians - The radians the vector will be rotated by.
    * @returns The rotated vector.
    */
-  public rotRad(radians: number): Vector {
+  public rotRad(radians: number): Vec {
     const cos = Math.cos(radians);
     const sin = Math.sin(radians);
-    return new Vector(this.x * cos - this.y * sin, this.x * sin + this.y * cos);
+    return new Vec(this.x * cos - this.y * sin, this.x * sin + this.y * cos);
   }
 
   /**
@@ -164,7 +164,7 @@ class Vector {
    * @param degrees - The degrees the vector will be rotated by.
    * @returns The rotated vector.
    */
-  public rotDeg(degrees: number): Vector {
+  public rotDeg(degrees: number): Vec {
     return this.rotRad((degrees * Math.PI) / 180);
   }
 
@@ -182,7 +182,7 @@ class Vector {
    * @param other - The other vector.
    * @returns Whether the vectors are equal.
    */
-  public equals(other: Vector): boolean;
+  public equals(other: Vec): boolean;
   /**
    * Check if the vector is equal to another vector.
    * @param x - The component of the x-axis.
@@ -190,8 +190,8 @@ class Vector {
    * @returns Whether the vectors are equal.
    */
   public equals(x: number, y: number): boolean;
-  public equals(vecOrX: Vector | number, y?: number): boolean {
-    const other = vecOrX instanceof Vector ? vecOrX : vec(vecOrX, y);
+  public equals(vecOrX: Vec | number, y?: number): boolean {
+    const other = vecOrX instanceof Vec ? vecOrX : vec(vecOrX, y);
     return this.x === other.x && this.y === other.y;
   }
 }
@@ -209,30 +209,30 @@ export type InputRect = {
  * @param y The component of the y-axis.
  * @returns The vector.
  */
-export function vec(x: number, y?: number): Vector;
+export function vec(x: number, y?: number): Vec;
 /**
  * Create a vector with the given components.
  * @param components The components of the vector.
  * @returns The vector.
  */
-export function vec([x, y]: [number, number]): Vector;
-export function vec({ x, y }: { x: number; y: number }): Vector;
+export function vec([x, y]: [number, number]): Vec;
+export function vec({ x, y }: { x: number; y: number }): Vec;
 export function vec(
   xOrArrayOrObject: number | [number, number] | { x: number; y: number },
   y?: number
-): Vector {
+): Vec {
   if (Array.isArray(xOrArrayOrObject)) {
-    return new Vector(xOrArrayOrObject[0], xOrArrayOrObject[1]);
+    return new Vec(xOrArrayOrObject[0], xOrArrayOrObject[1]);
   }
   if (typeof xOrArrayOrObject === "number") {
-    return new Vector(xOrArrayOrObject, y ?? xOrArrayOrObject);
+    return new Vec(xOrArrayOrObject, y ?? xOrArrayOrObject);
   }
-  return new Vector(xOrArrayOrObject.x, xOrArrayOrObject.y);
+  return new Vec(xOrArrayOrObject.x, xOrArrayOrObject.y);
 }
 
 export type Rect = {
-  o: Vector;
-  d: Vector;
+  o: Vec;
+  d: Vec;
   as: (<
     X extends string,
     Y extends string,
@@ -249,13 +249,13 @@ export type Rect = {
   equals: (other: Rect) => boolean;
 };
 
-export function rect(origin: Vector, dim: Vector): Rect;
+export function rect(origin: Vec, dim: Vec): Rect;
 export function rect(rect: InputRect): Rect;
-export function rect(rectOrOrigin: InputRect | Vector, dim?: Vector): Rect {
+export function rect(rectOrOrigin: InputRect | Vec, dim?: Vec): Rect {
   const enhanced = {
-    o: rectOrOrigin instanceof Vector ? rectOrOrigin : vec(rectOrOrigin),
+    o: rectOrOrigin instanceof Vec ? rectOrOrigin : vec(rectOrOrigin),
     d:
-      rectOrOrigin instanceof Vector
+      rectOrOrigin instanceof Vec
         ? vec(dim!)
         : vec(rectOrOrigin.width, rectOrOrigin.height),
   };
@@ -295,4 +295,4 @@ export function rect(rectOrOrigin: InputRect | Vector, dim?: Vector): Rect {
   };
 }
 
-export type { Vector as Vec };
+export type { Vec };
