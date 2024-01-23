@@ -12,6 +12,24 @@ class Vec {
   public constructor(public readonly x: number, public readonly y: number) {}
 
   /**
+   * Create a new vector with the given x component.
+   * @param x - The component of the x-axis.
+   * @returns A new vector with the given x component.
+   */
+  public setX(x: number): Vec {
+    return new Vec(x, this.y);
+  }
+
+  /**
+   * Create a new vector with the given y component.
+   * @param y - The component of the y-axis.
+   * @returns A new vector with the given y component.
+   */
+  public setY(y: number): Vec {
+    return new Vec(this.x, y);
+  }
+
+  /**
    * Add another vector to the vector.
    * @param other - The vector to be added.
    * @returns The resulting vector of the addition.
