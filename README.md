@@ -97,25 +97,25 @@ r1.d; // => vec(3, 4)
 
 Utilities for converting the rect to different style formats.
 
-**as.styleObject**
+**as.styleObject()**
 
 Returns a style object that can be applied to an HTML or React element.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
 
-r1.as.styleObject; // => { left: "1px", top: "2px", width: "3px", height: "4px" }
-myDiv.style = r1.as.styleObject;
+r1.as.styleObject(); // => { left: "1px", top: "2px", width: "3px", height: "4px" }
+myDiv.style = r1.as.styleObject();
 ```
 
-**as.cssText**
+**as.cssText()**
 
 Returns a CSS text string.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
 
-r1.as.cssText; // => "left: 1px; top: 2px; width: 3px; height: 4px;"
+r1.as.cssText(); // => "left: 1px; top: 2px; width: 3px; height: 4px;"
 ```
 
 #### **setO()**
