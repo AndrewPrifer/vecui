@@ -248,28 +248,34 @@ export function vec(
   return new Vec(xOrArrayOrObject.x, xOrArrayOrObject.y);
 }
 
-// export type Rect = {
-//   o: Vec;
-//   d: Vec;
-//   as: (<
-//     X extends string,
-//     Y extends string,
-//     Width extends string,
-//     Height extends string
-//   >(
-//     x: X,
-//     y: Y,
-//     width: Width,
-//     height: Height
-//   ) => Record<X | Y | Width | Height, number>) & {
-//     css: Record<"left" | "top" | "width" | "height", number>;
-//   };
-//   equals: (other: Rect) => boolean;
-// };
-
-// Rect as a class
+/**
+ * An immutable 2D rectangle that supports various operations.
+ */
 class Rect {
+  /**
+   * Create a rectangle with the given origin and dimensions.
+   * @param o - origin
+   * @param d - dimension
+   */
   public constructor(public readonly o: Vec, public readonly d: Vec) {}
+
+  /**
+   * Create a new rectangle with the given origin.
+   * @param origin - The origin of the rectangle.
+   * @returns A new rectangle with the given origin.
+   */
+  public setO(origin: Vec): Rect {
+    return new Rect(origin, this.d);
+  }
+
+  /**
+   * Create a new rectangle with the given dimensions
+   * @param dim - The dimension of the rectangle.
+   * @returns A new rectangle with the given dimension.
+   */
+  public setD(dim: Vec): Rect {
+    return new Rect(this.o, dim);
+  }
 
   public get as() {
     const as = <
