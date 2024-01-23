@@ -69,7 +69,7 @@ function App() {
         className="center rect"
         style={{
           // apply the yellow div's rect
-          ...centerRect.as.css,
+          ...centerRect.as.styleObject(),
         }}
       />
       <motion.div
@@ -77,7 +77,7 @@ function App() {
         initial={false}
         animate={{
           // apply the pink div's rect
-          ...alignedRect.as.css,
+          ...alignedRect.as.styleObject(),
         }}
         whileHover={{
           // while hovered, expand the pink div by
@@ -88,7 +88,7 @@ function App() {
             ),
             // adding the hover expand vector to its dimensions (twice because it's being added to both sides)
             alignedRect.d.add(hoverExpandVec.mul(2))
-          ).as.css,
+          ).as.styleObject(),
         }}
       >
         Hover me!

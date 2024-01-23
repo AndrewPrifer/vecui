@@ -248,6 +248,16 @@ export function vec(
   return new Vec(xOrArrayOrObject.x, xOrArrayOrObject.y);
 }
 
+type RectAs = {
+  styleObject: () => {
+    left: string;
+    top: string;
+    width: string;
+    height: string;
+  };
+  cssText: () => string;
+};
+
 /**
  * An immutable 2D rectangle that supports various operations.
  */
@@ -277,33 +287,20 @@ class Rect {
     return new Rect(this.o, dim);
   }
 
-  public get as() {
-    const as = <
-      X extends string,
-      Y extends string,
-      Width extends string,
-      Height extends string
-    >(
-      x: X,
-      y: Y,
-      width: Width,
-      height: Height
-    ) =>
-      ({
-        [x]: this.o.x,
-        [y]: this.o.y,
-        [width]: this.d.x,
-        [height]: this.d.y,
-      } as Record<X | Y | Width | Height, number>);
-
-    as.css = {
-      left: this.o.x,
-      top: this.o.y,
-      width: this.d.x,
-      height: this.d.y,
+  public get as(): RectAs {
+    return {
+      styleObject: () => ({
+        left: `${this.o.x}px`,
+        top: `${this.o.y}px`,
+        width: `${this.d.x}px`,
+        height: `${this.d.y}px`,
+      }),
+      cssText() {
+        return Object.entries(this.styleObject)
+          .map(([key, value]) => `${key}: ${value};`)
+          .join(" ");
+      },
     };
-
-    return as;
   }
 
   public equals(other: Rect) {

@@ -27,66 +27,34 @@ yarn add vecui
 
 The best way to get an intuition for VecUI and see what it looks like is to play with the [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32).
 
-Alternatively, here's an excerpt (the actual demo is not much longer, you should really go play with it).
+Generally, you will
+
+1. Create rects and vectors with `rect()` and `vec()` to represent your UI elements.
+2. Use the vector operations to manipulate them.
+3. Apply them to your UI.
 
 ```typescript
-// How much the pink div will expand on hover on either direction
-const hoverExpandVec = vec(hoverExpand);
-
-let alignedRect: UIRect | null = null;
-
-// Create a vector for the dimensions of the yellow div
-const centerRectDim = vec(centerRectSize);
-// Create a rect representing the yellow div and offset it by minus half its dimensions so that it's centered
-const centerRect = rect(centerRectDim.div(-2), centerRectDim);
-
-// Create a rect for the pink div
-const otherRect = rect(vec(0), vec(otherRectSize));
-
-// Align it to the right side of the yellow div by
-alignedRect = rect(
-  centerRect.o
-    // offsetting its origin by the width of the yellow div
-    .add(centerRect.d.x, 0)
-    // adding the padding in the x direction and
+// Create a vector for the dimensions of an anchor div
+const dimensions = vec(30);
+// Create a rect for the anchor div, centered at the origin
+const anchorRect = rect(dimensions.div(-2), dimensions);
+// Create a rect that is vertically centered and horizontally aligned to the right of the anchor div by
+const alignedRect = rect(
+  anchorRect.o
+    // offsetting its origin by the width of the anchor div
+    .add(anchorRect.d.x, 0)
     .add(
-      padding,
+      // adding the padding in the x direction and
+      8,
       // centering it vertically
-      centerRect.d.sub(otherRect.d).div(2).y
+      anchorRect.d.sub(alignedRect.d).div(2).y
     ),
-  otherRect.d
+  // size of the aligned rect
+  vec(20)
 );
-
-return (
-  <div className="container">
-    <div
-      className="center rect"
-      style={{
-        // apply the yellow div's rect
-        ...centerRect.as.css,
-      }}
-    />
-    <motion.div
-      className="other rect"
-      initial={false}
-      animate={{
-        // apply the pink div's rect
-        ...alignedRect.as.css,
-      }}
-      whileHover={{
-        // while hovered, expand the pink div by
-        ...rect(
-          // negatively offsetting its origin by the hover expand vector (only in the y direction if keepAlignedOnHover is true)
-          alignedRect.o.sub(hoverExpandVec.mul(keepAlignedOnHover ? 0 : 1, 1)),
-          // adding the hover expand vector to its dimensions (twice because it's being added to both sides)
-          alignedRect.d.add(hoverExpandVec.mul(2))
-        ).as.css,
-      }}
-    >
-      Hover me!
-    </motion.div>
-  </div>
-);
+// Apply it to your UI
+const alignedDiv = document.getElementById("aligned");
+alignedDiv.style = alignedRect.as.styleObject;
 ```
 
 ## API
@@ -125,6 +93,31 @@ const r1 = rect(vec(1, 2), vec(3, 4));
 r1.d; // => vec(3, 4)
 ```
 
+#### **as**
+
+Utilities for converting the rect to different style formats.
+
+**as.styleObject**
+
+Returns a style object that can be applied to an HTML or React element.
+
+```typescript
+const r1 = rect(vec(1, 2), vec(3, 4));
+
+r1.as.styleObject; // => { left: "1px", top: "2px", width: "3px", height: "4px" }
+myDiv.style = r1.as.styleObject;
+```
+
+**as.cssText**
+
+Returns a CSS text string.
+
+```typescript
+const r1 = rect(vec(1, 2), vec(3, 4));
+
+r1.as.cssText; // => "left: 1px; top: 2px; width: 3px; height: 4px;"
+```
+
 #### **setO()**
 
 Returns a new rectangle with the origin point set to the specified vector.
@@ -143,24 +136,6 @@ Returns a new rectangle with the dimensions set to the specified vector.
 const r1 = rect(vec(1, 2), vec(3, 4));
 
 r1.setD(vec(5, 6)); // => rect(vec(1, 2), vec(5, 6))
-```
-
-#### **as()**
-
-Maps the rectangle to an object with the specified property names.
-
-```typescript
-const r1 = rect(vec(1, 2), vec(3, 4));
-
-r1.as("x", "y", "width", "height"); // => { x: 1, y: 2, width: 3, height: 4 }
-```
-
-Alternatively, you can also use the `.as.css` shortcut to map the rectangle to an object with the names `top`, `left`, `width`, and `height`.
-
-```typescript
-const r1 = rect(vec(1, 2), vec(3, 4));
-
-r1.as.css; // => { top: 1, left: 2, width: 3, height: 4 }
 ```
 
 #### **equals()**
