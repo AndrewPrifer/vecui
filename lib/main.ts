@@ -323,4 +323,4 @@ export function rect(rectOrOrigin: InputRect | Vec, dim?: Vec): Rect {
   );
 }
 
-export type { Vec };
+export type { Vec, Rect };
