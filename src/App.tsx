@@ -51,7 +51,7 @@ function App() {
   const otherRect = rect(vec(0), vec(otherRectSize));
 
   // Align it to the right side of the yellow div by
-  alignedRect = rect(
+  alignedRect = otherRect.setO(
     centerRect.o
       // offsetting its origin by the width of the yellow div
       .add(centerRect.d.x, 0)
@@ -60,8 +60,7 @@ function App() {
         padding,
         // centering it vertically
         centerRect.d.sub(otherRect.d).div(2).y
-      ),
-    otherRect.d
+      )
   );
 
   return (
