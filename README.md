@@ -125,6 +125,26 @@ const r1 = rect(vec(1, 2), vec(3, 4));
 r1.d; // => vec(3, 4)
 ```
 
+#### **setO()**
+
+Returns a new rectangle with the origin point set to the specified vector.
+
+```typescript
+const r1 = rect(vec(1, 2), vec(3, 4));
+
+r1.setO(vec(5, 6)); // => rect(vec(5, 6), vec(3, 4))
+```
+
+#### **setD()**
+
+Returns a new rectangle with the dimensions set to the specified vector.
+
+```typescript
+const r1 = rect(vec(1, 2), vec(3, 4));
+
+r1.setD(vec(5, 6)); // => rect(vec(1, 2), vec(5, 6))
+```
+
 #### **as()**
 
 Maps the rectangle to an object with the specified property names.
@@ -187,6 +207,26 @@ The y component of the vector.
 const v1 = vec(1, 2);
 
 v1.y; // => 2
+```
+
+#### **setX()**
+
+Returns a new vector with the x component set to the specified value.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.setX(3); // => vec(3, 2)
+```
+
+#### **setY()**
+
+Returns a new vector with the y component set to the specified value.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.setY(3); // => vec(1, 3)
 ```
 
 #### **add()**
