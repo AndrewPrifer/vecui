@@ -248,69 +248,73 @@ export function vec(
   return new Vec(xOrArrayOrObject.x, xOrArrayOrObject.y);
 }
 
-export type Rect = {
-  o: Vec;
-  d: Vec;
-  as: (<
-    X extends string,
-    Y extends string,
-    Width extends string,
-    Height extends string
-  >(
-    x: X,
-    y: Y,
-    width: Width,
-    height: Height
-  ) => Record<X | Y | Width | Height, number>) & {
-    css: Record<"left" | "top" | "width" | "height", number>;
-  };
-  equals: (other: Rect) => boolean;
-};
+// export type Rect = {
+//   o: Vec;
+//   d: Vec;
+//   as: (<
+//     X extends string,
+//     Y extends string,
+//     Width extends string,
+//     Height extends string
+//   >(
+//     x: X,
+//     y: Y,
+//     width: Width,
+//     height: Height
+//   ) => Record<X | Y | Width | Height, number>) & {
+//     css: Record<"left" | "top" | "width" | "height", number>;
+//   };
+//   equals: (other: Rect) => boolean;
+// };
+
+// Rect as a class
+class Rect {
+  public constructor(public readonly o: Vec, public readonly d: Vec) {}
+
+  public get as() {
+    const as = <
+      X extends string,
+      Y extends string,
+      Width extends string,
+      Height extends string
+    >(
+      x: X,
+      y: Y,
+      width: Width,
+      height: Height
+    ) =>
+      ({
+        [x]: this.o.x,
+        [y]: this.o.y,
+        [width]: this.d.x,
+        [height]: this.d.y,
+      } as Record<X | Y | Width | Height, number>);
+
+    as.css = {
+      left: this.o.x,
+      top: this.o.y,
+      width: this.d.x,
+      height: this.d.y,
+    };
+
+    return as;
+  }
+
+  public equals(other: Rect) {
+    return other.o.equals(this.o) && other.d.equals(this.d);
+  }
+}
 
 export function rect(origin: Vec, dim: Vec): Rect;
 export function rect(rect: InputRect): Rect;
 export function rect(rectOrOrigin: InputRect | Vec, dim?: Vec): Rect {
-  const enhanced = {
-    o: rectOrOrigin instanceof Vec ? rectOrOrigin : vec(rectOrOrigin),
-    d:
-      rectOrOrigin instanceof Vec
-        ? vec(dim!)
-        : vec(rectOrOrigin.width, rectOrOrigin.height),
-  };
-
-  const as = <
-    X extends string,
-    Y extends string,
-    Width extends string,
-    Height extends string
-  >(
-    x: X,
-    y: Y,
-    width: Width,
-    height: Height
-  ) =>
-    ({
-      [x]: enhanced.o.x,
-      [y]: enhanced.o.y,
-      [width]: enhanced.d.x,
-      [height]: enhanced.d.y,
-    } as Record<X | Y | Width | Height, number>);
-
-  as.css = {
-    left: enhanced.o.x,
-    top: enhanced.o.y,
-    width: enhanced.d.x,
-    height: enhanced.d.y,
-  };
-
-  const equals = (other: Rect) =>
-    other.o.equals(enhanced.o) && other.d.equals(enhanced.d);
-
-  return {
-    ...enhanced,
-    as,
-    equals,
-  };
+  if (rectOrOrigin instanceof Vec) {
+    return new Rect(rectOrOrigin, dim!);
+  }
+  return new Rect(
+    vec(rectOrOrigin.x, rectOrOrigin.y),
+    vec(rectOrOrigin.width, rectOrOrigin.height)
+  );
 }
 
 export type { Vec };
