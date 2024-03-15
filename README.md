@@ -4,7 +4,9 @@ Tiny, ergonomic and fun vector library for UI engineers.
 
 ## Why?
 
-UIs are made of rectangles. Rectangles are made of 2 vectors. One for describing their origin point, and another for describing their width and height. Treating them as vectors instead of 4 disjointed numbers makes it much easier to reason about them and can trivially cut complex UI code in half (see [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32)).
+CSS doesn't lend itself well to animated layouts with complex constraints. In these cases I almost always had to code the layout myself using JavaScript and absolutely positioned elements in a flat hierarchy. This vector library is meant to make this very easy.
+
+That's because UIs are made of rectangles, and rectangles are made of 2 vectors: one for describing their origin point, and another for describing their width and height. Treating your layout as vectors makes it much easier to reason about and perform operations on it, and can trivially cut complex UI code in half (see [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32)).
 
 VecUI includes utilities to turn your UI into vectors and back again, and comes with a beautiful API that is both easy to read and write.
 
@@ -54,7 +56,7 @@ const alignedRect = rect(
 );
 // Apply it to your UI
 const alignedDiv = document.getElementById("aligned");
-alignedDiv.style = alignedRect.as.styleObject;
+alignedDiv.style = alignedRect.as.styleObject();
 ```
 
 ## API
@@ -69,8 +71,8 @@ Creates a rectangle with the specified origin point and dimensions.
 
 ```typescript
 const r1 = rect(vec(1, 2), vec(3, 4));
-const r3 = rect({ x: 1, y: 2, width: 3, height: 4 });
-const r4 = rect(htmlElement.getBoundingClientRect());
+const r2 = rect({ x: 1, y: 2, width: 3, height: 4 });
+const r3 = rect(htmlElement.getBoundingClientRect());
 ```
 
 #### **o**
