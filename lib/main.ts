@@ -199,12 +199,22 @@ class Vec {
     return this.rotRad((degrees * Math.PI) / 180);
   }
 
-  public isInRect(rect: InputRect): boolean {
+  public isInRect(rect: Rect): boolean;
+  public isInRect(rect: InputRect): boolean;
+  public isInRect(o: Vec, d: Vec): boolean;
+  public isInRect(inputOrO: InputRect | Rect | Vec, d?: Vec): boolean {
+    const r =
+      inputOrO instanceof Rect
+        ? inputOrO
+        : inputOrO instanceof Vec
+        ? rect(inputOrO, d!)
+        : rect(inputOrO);
+
     return (
-      rect.x <= this.x &&
-      rect.x + rect.width >= this.x &&
-      rect.y <= this.y &&
-      rect.y + rect.height >= this.y
+      r.o.x <= this.x &&
+      r.o.x + r.d.x >= this.x &&
+      r.o.y <= this.y &&
+      r.o.y + r.d.y >= this.y
     );
   }
 

@@ -373,7 +373,11 @@ Checks if the vector is within a given rectangle.
 ```typescript
 const v1 = vec(1, 2);
 
+v1.isInRect(rect(0, 0, 2, 3)); // => true
+
+// The function also accepts the same inputs as the rect() function so you can use it directly.
 v1.isInRect({ x: 0, y: 0, width: 2, height: 3 }); // => true
+v1.isInRect(vec(0, 0), vec(2, 3)); // => true
 ```
 
 #### **equals()**
