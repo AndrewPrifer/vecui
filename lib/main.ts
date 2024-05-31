@@ -11,6 +11,10 @@ class Vec {
    */
   public constructor(public readonly x: number, public readonly y: number) {}
 
+  get yx(): Vec {
+    return new Vec(this.y, this.x);
+  }
+
   /**
    * Create a new vector with the given x component.
    * @param x - The component of the x-axis.

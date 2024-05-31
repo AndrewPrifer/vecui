@@ -196,6 +196,16 @@ const v1 = vec(1, 2);
 v1.y; // => 2
 ```
 
+#### **yx**
+
+Returns a new vector with the components swapped.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.yx; // => vec(2, 1)
+```
+
 #### **setX()**
 
 Returns a new vector with the x component set to the specified value.
