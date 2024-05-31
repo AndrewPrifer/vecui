@@ -140,6 +140,16 @@ const r1 = rect(vec(1, 2), vec(3, 4));
 r1.setD(vec(5, 6)); // => rect(vec(1, 2), vec(5, 6))
 ```
 
+#### **map()**
+
+Map the origin point and dimensions of the rectangle.
+
+```typescript
+const r1 = rect(vec(1, 2), vec(3, 4));
+
+r1.map((o, d) => [o.add(1, 1), d.add(1, 1)]); // => rect(vec(2, 3), vec(4, 5))
+```
+
 #### **equals()**
 
 Checks if this rect equals another rect.
@@ -204,6 +214,16 @@ Returns a new vector with the y component set to the specified value.
 const v1 = vec(1, 2);
 
 v1.setY(3); // => vec(1, 3)
+```
+
+#### **map()**
+
+Maps the components of the vector.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.map((x, y) => [x + 1, y + 1]); // => vec(2, 3)
 ```
 
 #### **add()**

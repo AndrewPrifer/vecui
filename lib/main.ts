@@ -30,6 +30,15 @@ class Vec {
   }
 
   /**
+   * Create a new vector with the returned x and y components.
+   * @param fn - The function to map the x and y components of the vector.
+   * @returns The new vector with the mapped x and y components.
+   */
+  public map(fn: (x: number, y: number) => [number, number]): Vec {
+    return new Vec(...fn(this.x, this.y));
+  }
+
+  /**
    * Add another vector to the vector.
    * @param other - The vector to be added.
    * @returns The resulting vector of the addition.
@@ -285,6 +294,16 @@ class Rect {
    */
   public setD(dim: Vec): Rect {
     return new Rect(this.o, dim);
+  }
+
+  /**
+   * Create a new rectangle with the returned origin and dimensions.
+   *
+   * @param fn - The function to map the origin and dimensions of the rectangle.
+   * @returns The new rectangle with the mapped origin and dimensions.
+   */
+  public map(fn: (o: Vec, d: Vec) => [Vec, Vec]): Rect {
+    return new Rect(...fn(this.o, this.d));
   }
 
   public get as(): RectAs {
