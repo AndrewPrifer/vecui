@@ -38,8 +38,15 @@ class Vec {
    * @param fn - The function to map the x and y components of the vector.
    * @returns The new vector with the mapped x and y components.
    */
-  public map(fn: (x: number, y: number) => readonly [number, number]): Vec {
-    return new Vec(...fn(this.x, this.y));
+  public map(fn: (x: number, y: number) => number[]): Vec {
+    const components = fn(this.x, this.y);
+    // Have to do this instead of type checking for a tuple because of a TypeScript bug where it sometimes infers an array instead of a tuple.
+    if (components.length !== 2) {
+      throw new Error(
+        `The function must return an array of length 2, but got length ${components.length}`
+      );
+    }
+    return new Vec(...(components as [number, number]));
   }
 
   /**
@@ -316,8 +323,15 @@ class Rect {
    * @param fn - The function to map the origin and dimensions of the rectangle.
    * @returns The new rectangle with the mapped origin and dimensions.
    */
-  public map(fn: (o: Vec, d: Vec) => readonly [Vec, Vec]): Rect {
-    return new Rect(...fn(this.o, this.d));
+  public map(fn: (o: Vec, d: Vec) => Vec[]): Rect {
+    const components = fn(this.o, this.d);
+    // Have to do this instead of type checking for a tuple because of a TypeScript bug where it sometimes infers an array instead of a tuple.
+    if (components.length !== 2) {
+      throw new Error(
+        `The function must return an array of length 2, but got length ${components.length}`
+      );
+    }
+    return new Rect(...(components as [Vec, Vec]));
   }
 
   public get as(): RectAs {
