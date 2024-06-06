@@ -420,13 +420,3 @@ export function rect(rectOrOrigin: InputRect | Vec, dim?: Vec): Rect {
 }
 
 export type { Vec, Rect };
-
-{
-  {
-    const v1 = vec(1, 0);
-
-    v1.lookAt(vec(0, 1)); //?
-
-    (Math.PI * 3) / 4; //?
-  }
-}

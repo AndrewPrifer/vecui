@@ -388,12 +388,13 @@ v1.angleTo(vec(0, 1)); // => Math.PI / 2
 
 #### **lookAt()**
 
-Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object at the given side.
+Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object at the given side. Assumes a left-handed coordinate system.
 
 ```typescript
 const v1 = vec(1, 0);
 
 v1.lookAt(vec(0, 1)); // => Math.PI * 3 / 4
+v1.lookAt(vec(0, 1), "y"); // => Math.PI * 5 / 4
 ```
 
 #### **asArray()**
