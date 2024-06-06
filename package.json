@@ -19,7 +19,7 @@
   "repository": "AndrewPrifer/vecui",
   "bugs": "https://github.com/AndrewPrifer/vecui/issues",
   "homepage": "https://github.com/AndrewPrifer/vecui",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "type": "module",
   "files": [
     "dist"
