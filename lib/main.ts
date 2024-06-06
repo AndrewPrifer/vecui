@@ -227,7 +227,7 @@ class Vec {
   }
 
   /**
-   * Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object facing the given direction.
+   * Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object at the given side.
    *
    * @param target - The target vector to look at.
    * @param front - The front side of the object.
@@ -420,3 +420,13 @@ export function rect(rectOrOrigin: InputRect | Vec, dim?: Vec): Rect {
 }
 
 export type { Vec, Rect };
+
+{
+  {
+    const v1 = vec(1, 0);
+
+    v1.lookAt(vec(0, 1)); //?
+
+    (Math.PI * 3) / 4; //?
+  }
+}

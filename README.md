@@ -236,6 +236,16 @@ const v1 = vec(1, 2);
 v1.map((x, y) => [x + 1, y + 1]); // => vec(2, 3)
 ```
 
+#### **reduce()**
+
+Reduces the vector to a single value.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.reduce((x, y) => x + y); // => 3
+```
+
 #### **add()**
 
 Adds another vector or components to this vector.
@@ -364,6 +374,36 @@ Rotates the vector by a specified number of degrees.
 const v1 = vec(1, 0);
 
 v1.rotDeg(90); // => vec(0, 1)
+```
+
+#### **angleTo()**
+
+Calculates the angle between this vector and another vector.
+
+```typescript
+const v1 = vec(1, 0);
+
+v1.angleTo(vec(0, 1)); // => Math.PI / 2
+```
+
+#### **lookAt()**
+
+Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object at the given side.
+
+```typescript
+const v1 = vec(1, 0);
+
+v1.lookAt(vec(0, 1)); // => Math.PI * 3 / 4
+```
+
+#### **asArray()**
+
+Returns the vector as an array.
+
+```typescript
+const v1 = vec(1, 2);
+
+v1.asArray(); // => [1, 2]
 ```
 
 #### **isInRect()**
