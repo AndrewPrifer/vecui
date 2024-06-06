@@ -50,6 +50,16 @@ class Vec {
   }
 
   /**
+   * Reduce the vector to a single value.
+   *
+   * @param fn - The function to reduce the vector.
+   * @returns The reduced value.
+   */
+  public reduce<T>(fn: (x: number, y: number) => T): T {
+    return fn(this.x, this.y);
+  }
+
+  /**
    * Add another vector to the vector.
    * @param other - The vector to be added.
    * @returns The resulting vector of the addition.
@@ -204,6 +214,48 @@ class Vec {
    */
   public rotDeg(degrees: number): Vec {
     return this.rotRad((degrees * Math.PI) / 180);
+  }
+
+  /**
+   * Calculate the angle between the vector and another vector.
+   *
+   * @param target - The other vector used for calculating the angle.
+   * @returns The angle between the vectors in radians.
+   */
+  public angleTo(target: Vec): number {
+    return Math.acos(this.dot(target) / (this.len() * target.len()));
+  }
+
+  /**
+   * Calculate the rotation to apply to an object with coordinates at this vector to look at another vector, with the front of the object facing the given direction.
+   *
+   * @param target - The target vector to look at.
+   * @param front - The front side of the object.
+   * @returns The rotation in radians.
+   */
+  public lookAt(target: Vec, front: "x" | "y" | "-x" | "-y" = "x"): number {
+    const diff = target.sub(this);
+
+    const angle = Math.atan2(diff.y, diff.x);
+    switch (front) {
+      case "x":
+        return angle;
+      case "y":
+        return angle + Math.PI / 2;
+      case "-x":
+        return angle + Math.PI;
+      case "-y":
+        return angle + (Math.PI * 3) / 2;
+    }
+  }
+
+  /**
+   * Convert the vector to an array.
+   *
+   * @returns The vector as an array.
+   */
+  public asArray(): [number, number] {
+    return [this.x, this.y];
   }
 
   public isInRect(rect: Rect): boolean;

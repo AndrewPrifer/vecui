@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { vec, rect, Rect } from "../lib/main";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import { useControls } from "leva";
 
 /*
@@ -17,6 +22,7 @@ function App() {
     centerRectSize,
     otherRectSize,
     keepAlignedOnHover,
+    trackMouse,
   } = useControls({
     padding: { value: 16, min: 0, max: 100 },
     centerRectSize: {
@@ -35,6 +41,7 @@ function App() {
       },
       step: 1,
     },
+    trackMouse: false,
   });
 
   // How much the pink div will expand on hover on either direction
@@ -63,18 +70,42 @@ function App() {
       )
   );
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
+  });
+
+  const lookAtAngle = useTransform(() => {
+    const lookAt = vec(window.innerWidth / 2, window.innerHeight / 2).lookAt(
+      vec(mouseX.get(), mouseY.get())
+    );
+    return trackMouse ? lookAt : 0;
+  });
+
   return (
     <div className="container">
-      <div
+      <motion.div
         className="center rect"
         style={{
           // apply the yellow div's rect
           ...centerRect.as.styleObject(),
+          rotateZ: useMotionTemplate`${lookAtAngle}rad`,
+          borderRight: trackMouse ? "3px solid black" : "none",
         }}
       />
       <motion.div
         className="other rect"
         initial={false}
+        style={{
+          display: trackMouse ? "none" : "flex",
+        }}
         animate={{
           // apply the pink div's rect
           ...alignedRect.as.styleObject(),
