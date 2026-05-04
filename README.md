@@ -6,7 +6,7 @@ Tiny, ergonomic and fun vector library for UI engineers.
 
 CSS doesn't lend itself well to animated layouts with complex constraints. In these cases I almost always had to code the layout myself using JavaScript and absolutely positioned elements in a flat hierarchy. This vector library is meant to make this very easy.
 
-That's because UIs are made of rectangles, and rectangles are made of 2 vectors: one for describing their origin point, and another for describing their width and height. Treating your layout as vectors makes it much easier to reason about and perform operations on it, and can trivially cut complex UI code in half (see [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32)).
+That's because UIs are made of rectangles, and rectangles are made of 2 vectors: one for describing their origin point, and another for describing their width and height. Treating your layout as vectors makes it much easier to reason about and perform operations on it, and can trivially cut complex UI code in half (see [demo](https://stackblitz.com/github/AndrewPrifer/vecui?file=src%2FApp.tsx)).
 
 VecUI includes utilities to turn your UI into vectors and back again, and comes with a beautiful API that is both easy to read and write.
 
@@ -27,7 +27,7 @@ yarn add vecui
 
 ## Usage
 
-The best way to get an intuition for VecUI and see what it looks like is to play with the [demo](https://codesandbox.io/p/devbox/github/AndrewPrifer/vecui/tree/main?file=%2Fsrc%2FApp.tsx%3A55%2C32).
+The best way to get an intuition for VecUI and see what it looks like is to play with the [demo](https://stackblitz.com/github/AndrewPrifer/vecui?file=src%2FApp.tsx).
 
 Generally, you will
 
