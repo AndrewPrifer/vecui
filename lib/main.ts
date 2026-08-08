@@ -402,6 +402,49 @@ class Rect {
     };
   }
 
+  /**
+   * Check if this rectangle contains a point.
+   * @param point - The point to check.
+   * @returns Whether the point is inside the rectangle.
+   */
+  public contains(point: Vec): boolean;
+  /**
+   * Check if this rectangle contains another rectangle.
+   * @param other - The other rectangle.
+   * @returns Whether the other rectangle is completely inside this rectangle.
+   */
+  public contains(other: Rect): boolean;
+  public contains(target: Vec | Rect): boolean {
+    if (target instanceof Rect) {
+      return (
+        this.o.x <= target.o.x &&
+        this.o.y <= target.o.y &&
+        this.o.x + this.d.x >= target.o.x + target.d.x &&
+        this.o.y + this.d.y >= target.o.y + target.d.y
+      );
+    }
+    return (
+      this.o.x <= target.x &&
+      this.o.x + this.d.x >= target.x &&
+      this.o.y <= target.y &&
+      this.o.y + this.d.y >= target.y
+    );
+  }
+
+  /**
+   * Check if this rectangle intersects with another rectangle.
+   * @param other - The other rectangle.
+   * @returns Whether the rectangles intersect.
+   */
+  public intersects(other: Rect): boolean {
+    return (
+      this.o.x < other.o.x + other.d.x &&
+      this.o.x + this.d.x > other.o.x &&
+      this.o.y < other.o.y + other.d.y &&
+      this.o.y + this.d.y > other.o.y
+    );
+  }
+
   public equals(other: Rect) {
     return other.o.equals(this.o) && other.d.equals(this.d);
   }
